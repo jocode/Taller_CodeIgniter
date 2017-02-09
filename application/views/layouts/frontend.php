@@ -3,8 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Archivo frontend</title>
-	<link rel="stylesheet" href="../public/css/bootstrap.min.css">
-	<!-- href="<?php echo base_url(); ?>public/css/bootstrap.min.css;" -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
 </head>
 <body>
 	<h1>Título desde el Frontend</h1>

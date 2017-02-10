@@ -6,13 +6,13 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
 </head>
 <body>
-	<h1>Título desde el Frontend</h1>
-	<p>Frontend carga en todas las vistas, es común para todo, y este archivo es el encargado de cargar las vistas de los controladores</p>
+	<h1>Clase 4</h1>
+	<p>Se trabaja con la formularios y validaciones aplicando la librería form_validation de codeigniter</p>
 	<!--contenido-->
 	<?php echo $content_for_layout;?>
 	<!--/contenido-->
 </body>
 <footer>
-	<p>Página renderizada en <strong>{elapsed_time}</strong> segundos. Uso de memoria <strong>{memory_usage}</strong></p>
+	&copy Todos los derechos reservados.
 </footer>
 </html>

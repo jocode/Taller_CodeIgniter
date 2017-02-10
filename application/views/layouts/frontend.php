@@ -6,8 +6,9 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
 </head>
 <body>
-	<h1 class="text-center">Clase 4</h1>
-	<p class="text-center">Se trabaja con formularios y validaciones aplicando la librería form_validation de codeigniter, y algunos helpers para que no se pierda la información al envriar el formulario</p>
+	<h1 class="text-center">Clase 5</h1>
+	<p class="text-center">Se trabajará con la clase database de codeigniter.
+Veremos cómo crear nuestros modelos, cómo configurar la conexión a través del driver de MySQL.</p>
 	<!--contenido-->
 	<?php echo $content_for_layout;?>
 	<!--/contenido-->

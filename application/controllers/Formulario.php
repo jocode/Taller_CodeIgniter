@@ -21,8 +21,9 @@ class Formulario extends CI_Controller {
 	{
 		//Zona de procesamiento del formulario
 		if($this->input->post()){
-			// Entramos a post del formulario
-			print_r($_POST); exit;
+			if ($this->form_validation->run('add_formulario')){
+				// Entra y procesa el formulario
+			}
 		}
 		//Zona de visualización del formulario
 		$this->layout->view("add");

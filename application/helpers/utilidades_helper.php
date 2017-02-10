@@ -1,11 +1,62 @@
 <?php
-if(!function_exists("saludo"))
-{
-    function saludo()
-    {
-        return "hola #manosenelcódigo";
-    }
-}
+/**
+ * validación set Value select
+ * Funciona para que el usuario no pierda la selección al enviar un formulario
+ **/
+   if(!function_exists('set_value_select'))
+   {
+     function set_value_select($result=array(),$post,$campo,$valor)
+     {
+        if(sizeof($result)==0)
+                {
+                    if(isset($_POST[$post]) and $_POST[$post]==$valor)
+                    {
+                         return 'selected="true"';   
+                    }else
+                    {
+                        return '';
+                    }
+                }else
+                {
+                    if($campo==$valor)
+                    {
+                         return 'selected="true"';   
+                    }else
+                    {
+                        return '';
+                    }
+                }
+     }
+   } 
+   /**
+ * validación set Value Producción input
+ * Funciona para que no se pierda lo que escribe el usuario al enviar el formulario
+ **/
+   if(!function_exists('set_value_input'))
+   {
+     function set_value_input($result=array(),$post,$campo)
+     {
+        if(sizeof($result)==0)
+                {
+                    if(isset($_POST[$post]))
+                    {
+                         return $_POST[$post];   
+                    }else
+                    {
+                        return '';
+                    }
+                }else
+                {
+                    if($campo)
+                    {
+                         return $campo;   
+                    }else
+                    {
+                        return '';
+                    }
+                }
+     }
+   }
 /**
  *  Detectar el dispositivo para cargar css web o mobile
  * Retorna True si es un disposivo móvil

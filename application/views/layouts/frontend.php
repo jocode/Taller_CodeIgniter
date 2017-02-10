@@ -6,13 +6,13 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
 </head>
 <body>
-	<h1>Clase 4</h1>
-	<p>Se trabaja con la formularios y validaciones aplicando la librería form_validation de codeigniter</p>
+	<h1 class="text-center">Clase 4</h1>
+	<p class="text-center">Se trabaja con formularios y validaciones aplicando la librería form_validation de codeigniter, y algunos helpers para que no se pierda la información al envriar el formulario</p>
 	<!--contenido-->
 	<?php echo $content_for_layout;?>
 	<!--/contenido-->
 </body>
-<footer>
+<footer class="text-center">
 	&copy Todos los derechos reservados.
 </footer>
 </html>

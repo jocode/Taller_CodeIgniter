@@ -20,11 +20,34 @@ class productos_model extends CI_Model {
 				  ->order_by("id","asc")
 				  ->get();
 	    // echo $this->db->last_query(); exit;
+		/* result() -> Retorna un arreglo compuesto */
 		return $query->result();
 	}
 
-	public function add(){
-		
+	public function getAllById($id){
+		$query = $this->db
+				  ->select("id, nombre, precio, stock, fecha")
+				  ->from("productos")
+				  ->where(array("id"=>$id))
+				  ->get();
+	    // echo $this->db->last_query(); exit;
+	    /*  row() -> Retorna una única fila, en un arreglo con formato simple */
+		return $query->row();
+	}
+
+	public function insertar($data = array()){
+		/* insert() -> recibe por parámetro la tabla y los datos */
+		$this->db->insert('productos', $data);
+		/* insert_id()-> Devuelve el id, del registro que acaba de ingresar */
+		return $this->db->insert_id();
+	}
+
+	public function update(){
+
+	}
+
+	public function delete(){
+
 	}
 
 }

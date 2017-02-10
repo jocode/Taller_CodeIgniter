@@ -3,7 +3,7 @@
 		<div class="panel-heading">Listado de productos</div>
 		<div class="panel-body">
 			<p>
-				<a class="btn btn-success" href="" title=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Agregar</a>
+				<a class="btn btn-success" href="<?php echo base_url(); ?>productos/add" title="Agregar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Agregar</a>
 				<table class="table table-bordered table-sprited table-hover">
 					<thead>
 						<tr>
@@ -25,8 +25,8 @@
 									<td><?php echo $dato->stock; ?></td>
 									<td><?php echo fecha($dato->fecha); ?></td>
 									<td class="text-center">
-										<a href="" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-										<a href="" title="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+										<a href="<?php echo base_url(); ?>productos/edit/<?php echo $dato->id; ?>" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+										<a href="<?php echo base_url(); ?>productos/delete/<?php echo $dato->id; ?>" title="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 									</td>
 								</tr>
 						<?php } ?>

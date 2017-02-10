@@ -13,5 +13,14 @@ class Productos extends CI_Controller {
 		//print_r($datos); exit;
 		$this->layout->view('index', compact("datos"));
 	}
+
+	public function add(){
+		if($this->input->post()){
+			if($this->form_validation->run('add_producto')){
+				
+			}
+		}
+		$this->layout->view('add');
+	}
 	
 }

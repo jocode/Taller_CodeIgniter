@@ -13,6 +13,7 @@ $config = array(
             array('field' => 'nombre','label' => 'Nombre','rules' => 'required|is_string|trim|max_length[5]'),
             array('field' => 'correo','label' => 'E-Mail','rules' => 'required|is_string|trim|valid_email'),
             array('field' => 'telefono','label' => 'Teléfono','rules' => 'required|is_numeric|trim'),
+            array('field' => 'rut','label' => 'RUT','rules' => 'required|is_string|trim|esRut'),
             
         ), 
         

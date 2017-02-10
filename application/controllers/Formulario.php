@@ -23,6 +23,11 @@ class Formulario extends CI_Controller {
 		if($this->input->post()){
 			if ($this->form_validation->run('add_formulario')){
 				// Entra y procesa el formulario
+				echo $this->input->post("nombre").'<br>';
+				echo $this->input->post("correo").'<br>';
+				echo $this->input->post("telefono").'<br>';
+				echo $this->input->post("rut");
+
 			}
 		}
 		//Zona de visualización del formulario

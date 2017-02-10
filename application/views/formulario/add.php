@@ -29,6 +29,12 @@
 			<p><label for="telefono">Teléfono</label>
 				<input type="number" name="telefono" class="form-control" value="<?php echo set_value_input(array(), 'telefono', 'telefono'); ?>"/>
 			</p>
+
+			<p>
+				<label for="correo">RUT:</label>
+				<input type="text" name="rut" class="form-control" value="<?php echo set_value_input(array(),'rut','rut')?>" />
+			</p>
+			
 			<input type="submit" name="enviar" value="Enviar" class="btn btn-default">
 						<?php echo form_close(); ?>
 					</div>

@@ -14,6 +14,11 @@ class Productos extends CI_Controller {
 		$this->layout->view('index', compact("datos"));
 	}
 
+	public function listado(){
+		$datos = $this->productos_model->getAll();
+		$this->layout->view('listado', compact("datos"));
+	}
+
 	public function add(){
 		if($this->input->post()){
 			if($this->form_validation->run('add_producto')){

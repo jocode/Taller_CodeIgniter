@@ -1,6 +1,6 @@
 <div class="container">
 	<ol class="breadcrumb">
-		<li><a href="<?php echo base_url(); ?>productos">Listado de productos</a></li>
+		<li><a href="<?php echo base_url(); ?>productos/listado/<?php echo $pagina; ?>">Listado de productos</a></li>
 		<li class="active">Editar Producto</li>
 	</ol>
 	<div class="panel panel-primary">

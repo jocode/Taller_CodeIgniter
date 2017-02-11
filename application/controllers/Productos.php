@@ -22,7 +22,7 @@ class Productos extends CI_Controller {
 		} else {
 			$pagina = 0;
 		}
-		$por_pagina = 4;
+		$por_pagina = 1;
 
 		// Zona de carga de datos
 		$datos = $this->productos_model->getAllPagination($pagina, $por_pagina, "limit");
@@ -34,6 +34,32 @@ class Productos extends CI_Controller {
 		$config['per_page'] = $por_pagina;
 		/*Definir el uri_sergment directamente como string, porque al pasarlo por la variable no toma el diseño correcto en la vista*/
 		$config['uri_segment'] = '3';
+		/* Define la cantidad de numeros a mostrar, y se incrementan en base al cambio de página */
+		$config['num_links'] = '5';
+
+		/* Personalización de los links de navegación */
+		$config['first_link'] = 'Primero';
+		$config['last_link'] = 'Último';
+		$config['next_link'] = 'Siguiente';
+		$config['prev_link'] = 'Anterior';
+
+		/*Definir estilos de los tags para los links*/
+		$config['full_tag_open'] = '<ul class="pagination">';
+
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+	    $config['cur_tag_open'] = '<li><a><b>';
+		$config['cur_tag_close'] = '</b></a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+
+		$config['full_tag_close'] = '</ul>';
 
 		$this->pagination->initialize($config);
 
@@ -63,7 +89,7 @@ class Productos extends CI_Controller {
 		$this->layout->view('add');
 	}
 
-	public function edit($id=null){
+	public function edit($id=null, $pagina = null){
 		/*Si no vienen parámetros, mostrar error 404*/
 		if(!$id){show_404();}
 		$datos = $this->productos_model->getAllById($id);
@@ -87,7 +113,7 @@ class Productos extends CI_Controller {
 			}
 		}
 
-		$this->layout->view('edit', compact('datos','id'));
+		$this->layout->view('edit', compact('datos','id','pagina'));
 	}
 
 	public function delete($id=null){

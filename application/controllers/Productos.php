@@ -63,5 +63,17 @@ class Productos extends CI_Controller {
 
 		$this->layout->view('edit', compact('datos','id'));
 	}
+
+	public function delete($id=null){
+		if(!id){show_404();}
+		$datos = $this->productos_model->getAllById($id);
+		if(sizeof($datos)==0){show_404();}
+		$this->productos_model->delete($id);
+
+		$this->session->set_flashdata('css', 'success');
+		$this->session->set_flashdata('mensaje', 'El Registro se ha eliminado exitosamente');
+
+		redirect(base_url().'productos');
+	}
 	
 }

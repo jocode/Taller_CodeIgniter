@@ -46,14 +46,14 @@ class productos_model extends CI_Model {
 
 	public function update($data = array(), $id){
 		/*Usar el método where y pasar por parámetro el id del producto que se va a editar*/
-		$query = $this->db->where('id', $id);
+		$this->db->where('id', $id);
 		/*Hacer la actualización de los datos, pasando por patámetro la tabla y los datos que he enviado en en controlador*/
 		$this->db->update('productos', $data);
 	}
 
-	public function delete($data = array(), $id){
-		$query = $this->db->where('id', $id);
-		$this->db->delete('productos', $data);
+	public function delete($id){
+		$this->db->where('id', $id);
+		$this->db->delete('productos');
 	}
 
 }

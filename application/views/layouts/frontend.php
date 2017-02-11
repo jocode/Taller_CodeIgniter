@@ -11,6 +11,8 @@
 	<!--contenido-->
 	<?php echo $content_for_layout;?>
 	<!--/contenido-->
+	<script src="<?php echo base_url(); ?>public/js/jquery.js" type="text/javascript"></script>
+	<script src="<?php echo base_url(); ?>public/js/funciones.js" type="text/javascript"></script>
 </body>
 <footer class="text-center">
 	&copy Todos los derechos reservados.

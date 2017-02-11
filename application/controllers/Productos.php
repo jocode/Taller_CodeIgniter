@@ -38,9 +38,28 @@ class Productos extends CI_Controller {
 	}
 
 	public function edit($id=null){
+		/*Si no vienen parámetros, mostrar error 404*/
 		if(!$id){show_404();}
 		$datos = $this->productos_model->getAllById($id);
+		/*Si no hay informacion relacionada con ese id, mostrar error 404*/
 		if(sizeof($datos)==0){show_404();}
+
+		if ($this->input->post()){
+			if ($this->form_validation->run('add_producto')){
+				$data = array(
+					'nombre'=>$this->input->post('nombre', true),
+					'precio'=>$this->input->post('precio', true),
+					'stock'=>$this->input->post('stock', true),
+					);
+
+				$this->productos_model->update($data, $this->input->post('id', true));
+
+				$this->session->set_flashdata('css', 'success');
+				$this->session->set_flashdata('mensaje', 'El Registro se ha modificado exitosamente');
+
+				redirect(base_url().'productos');
+			}
+		}
 
 		$this->layout->view('edit', compact('datos','id'));
 	}

@@ -30,7 +30,9 @@ class productos_model extends CI_Model {
 				  ->from("productos")
 				  ->where(array("id"=>$id))
 				  ->get();
-	    // echo $this->db->last_query(); exit;
+	    /**
+	    * Devuelve la consulta que ha construido el active record
+	    * echo $this->db->last_query(); exit; */
 	    /*  row() -> Retorna una única fila, en un arreglo con formato simple */
 		return $query->row();
 	}
@@ -42,12 +44,16 @@ class productos_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	public function update(){
-
+	public function update($data = array(), $id){
+		/*Usar el método where y pasar por parámetro el id del producto que se va a editar*/
+		$query = $this->db->where('id', $id);
+		/*Hacer la actualización de los datos, pasando por patámetro la tabla y los datos que he enviado en en controlador*/
+		$this->db->update('productos', $data);
 	}
 
-	public function delete(){
-
+	public function delete($data = array(), $id){
+		$query = $this->db->where('id', $id);
+		$this->db->delete('productos', $data);
 	}
 
 }

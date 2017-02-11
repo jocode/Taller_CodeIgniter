@@ -15,8 +15,29 @@ class Productos extends CI_Controller {
 	}
 
 	public function listado(){
-		$datos = $this->productos_model->getAll();
-		$this->layout->view('listado', compact("datos"));
+
+		// Zona de configuración inicial de la paginacion
+		if($this->uri->segment(3)){
+			$pagina = $this->uri->segment(3);
+		} else {
+			$pagina = 0;
+		}
+		$por_pagina = 4;
+
+		// Zona de carga de datos
+		$datos = $this->productos_model->getAllPagination($pagina, $por_pagina, "limit");
+		$cuantos = $this->productos_model->getAllPagination($pagina, $por_pagina,"cuantos");
+		
+		// Zona de configuración de la librería pagination
+		$config['base_url']= base_url()."productos/listado";
+		$config['total_rows'] = $cuantos;
+		$config['per_page'] = $por_pagina;
+		/*Definir el uri_sergment directamente como string, porque al pasarlo por la variable no toma el diseño correcto en la vista*/
+		$config['uri_segment'] = '3';
+
+		$this->pagination->initialize($config);
+
+		$this->layout->view('listado', compact("datos", "cuantos", "pagina"));
 	}
 
 	public function add(){
@@ -76,7 +97,7 @@ class Productos extends CI_Controller {
 		$this->productos_model->delete($id);
 
 		$this->session->set_flashdata('css', 'success');
-		$this->session->set_flashdata('mensaje', 'El Registro se ha eliminado exitosamente');
+		$this->session->set_flashdata('mensaje','El Registro se ha eliminado exitosamente');
 
 		redirect(base_url().'productos');
 	}

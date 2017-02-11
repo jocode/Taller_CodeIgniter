@@ -56,6 +56,35 @@ class productos_model extends CI_Model {
 		$this->db->delete('productos');
 	}
 
+
+	/**  Método de paginación
+	*
+	*
+	* 
+	**/
+	public function getAllPagination($pagina, $por_pagina, $accion){
+		switch ($accion) {
+			case 'limit':
+					$query = $this->db 
+								->select('id, nombre, precio, stock, fecha')
+								->from('productos')
+								->limit($por_pagina, $pagina)
+								->order_by('id', 'asc')
+								->get();
+					return $query->result();
+				break;
+
+			case 'cuantos':
+					$query = $this->db 
+								->select('id, nombre, precio, stock, fecha')
+								->from('productos')
+								->count_all_results();
+								/* count_all_results() -> Retorna la cantidad total de registros */
+					return $query;
+				break;
+		}
+	}
+
 }
 
 ?>

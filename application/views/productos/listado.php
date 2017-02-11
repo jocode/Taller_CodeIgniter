@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="panel-primary">
-		<div class="panel-heading">Listado de productos</div>
+		<div class="panel-heading">Listado de productos (<?php echo $cuantos; ?> registros)</div>
 		<div class="panel-body">
 			<?php if($this->session->flashdata('mensaje') != ''){ ?>
 			<div class="alert alert-<?php echo $this->session->flashdata('css'); ?> text-center">
@@ -37,6 +37,7 @@
 						<?php } ?>
 					</tbody>
 				</table>
+				<p class="pull-right"><?php echo $this->pagination->create_links(); ?></p>
 			</p>
 		</div>
 	</div>

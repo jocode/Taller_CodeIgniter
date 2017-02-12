@@ -38,7 +38,9 @@
 			<div class="row">
 				<?php foreach ($fotos as $foto) { ?>
 				<div class="col-xs-6 col-md-3">
-						<img src="<?php echo base_url(); ?>public/uploads/productos/<?php echo $foto->foto; ?>" alt=""  class="thumbnail" width="100" heigth="100"/>
+						<img src="<?php echo base_url(); ?>public/uploads/productos/<?php echo $foto->foto; ?>" alt=""  class="thumbnail" width="100" height="100"/>
+						<a href="javascript:void(0);" onclick="eliminar('<?php echo base_url(); ?>productos/fotos_delete/<?php echo $datos->id; ?>/<?php echo $foto->id; ?>/<?php echo $pagina; ?>');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+						<hr/>
 				</div>
 				<?php } ?>
 			</div>

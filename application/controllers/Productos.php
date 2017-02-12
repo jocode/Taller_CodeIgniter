@@ -153,24 +153,94 @@ class Productos extends CI_Controller {
 			redirect(base_url().'productos/fotos/'.$this->input->post('id').'/'.$this->input->post('pagina'));
 		}
 
-		$fotos = $this->productos_model->getFotoById($id);
+		$fotos = $this->productos_model->getFotosById($id);
 		$this->layout->view('fotos', compact('datos','id','pagina', 'fotos'));
 	}
 
-	public function fotos_multiple($id=null, $pagina=null){
+	public function fotos_multiples($id=null, $pagina=null){
 		if(!$id){show_404();}
 		$datos = $this->productos_model->getAllById($id);
 		if(sizeof($datos)==0){show_404();}
 
 		if($this->input->post()){
-			
+
+			$total = count($_FILES['file']['name']);
+
+			for($i=0; $i<$total; $i++){
+				#print_r($_FILES['file']['type'][$i]);
+				switch ($_FILES['file']['type'][$i]) {
+					#Case para el formato mimetype
+					case 'image/jpeg':
+						// Insertamos el registro con la foto vacía
+						$data = array(
+							"id_producto"=>$this->input->post('id', true),
+							"foto"=>'',
+							);
+						$valor = $this->productos_model->insertarFoto($data);
+						// Subimos la foto
+						$foto = 'foto_'.$this->input->post('id',true).'_'.$valor.'.jpg';
+						copy($_FILES['file']['tmp_name'][$i],"public/uploads/productos/".$foto);
+						//Actualizamos el registro con el nombre de la foto
+						$data1=array
+						(
+							"foto"=>$foto,
+							);
+						$this->productos_model->updateFoto($data1,$valor);
+
+					break;
+					case 'image/png':
+						$data = array(
+							"id_producto"=>$this->input->post('id', true),
+							"foto"=>'',
+							);
+						$valor = $this->productos_model->insertarFoto($data);
+						$foto = 'foto_'.$this->input->post('id',true).'_'.$valor.'.png';
+						copy($_FILES['file']['tmp_name'][$i],"public/uploads/productos/".$foto);
+						$data1=array
+						(
+							"foto"=>$foto,
+							);
+						$this->productos_model->updateFoto($data1,$valor);
+					break;
+					
+					default:
+					$this->session->set_flashdata('css', 'danger');
+					$this->session->set_flashdata('mensaje','El tipo de archivo no es correcto');
+
+					redirect(base_url().'productos/fotos_multiples/'.$this->input->post('id').'/'.$this->input->post('pagina'));
+					break;
+				}
+			}
+			//Redireccionamos al usaurio a la vista respectiva
+			$this->session->set_flashdata('css', 'success');
+			$this->session->set_flashdata('mensaje','Se han agregado '.$i.' fotos exitosamente.');
+
+			redirect(base_url().'productos/fotos_multiples/'.$this->input->post('id').'/'.$this->input->post('pagina'));
 		}
-		$fotos = $this->productos_model->getFotoById($id);
-		$this->layout->view('fotos', compact('datos', 'id', 'fotos'));
+
+		$fotos = $this->productos_model->getFotosById($id);
+		$this->layout->view('fotos', compact('datos', 'id', 'fotos','pagina'));
+	}
+
+	public function fotos_delete($id_producto=null, $id_foto=null, $pagina=null){
+		if(! ($id_producto or $id_foto)){show_404();}
+		$datos = $this->productos_model->getAllById($id_producto);
+		if(sizeof($datos)==0){show_404();}
+		$foto = $this->productos_model->getFotoById($id_foto);
+		if(count($foto)==0){show_404();}
+		// Borrar la foto físicamente
+		unlink('public/uploads/productos/'.$foto->foto);
+		// Borar el registro de la base de 
+		$this->productos_model->deleteFoto($id_foto);
+		// Redireccionar al usuario
+		$this->session->set_flashdata('css', 'success');
+		$this->session->set_flashdata('mensaje','Se ha eliminado la foto exitosamente.');
+
+		redirect(base_url().'productos/fotos_multiples/'.$id_producto.'/'.$pagina);
 	}
 
 	public function delete($id=null){
-		if(!id){show_404();}
+		if(!$id){show_404();}
 		$datos = $this->productos_model->getAllById($id);
 		if(sizeof($datos)==0){show_404();}
 		$this->productos_model->delete($id);

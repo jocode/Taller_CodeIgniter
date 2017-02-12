@@ -31,7 +31,7 @@
 							<td><?php echo $dato->stock; ?></td>
 							<td><?php echo fecha($dato->fecha); ?></td>
 							<td>
-								<a href="<?php echo base_url(); ?>productos/fotos/<?php echo $dato->id; ?>/<?php echo $pagina; ?>"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+								<a href="<?php echo base_url(); ?>productos/fotos_multiples/<?php echo $dato->id; ?>/<?php echo $pagina; ?>"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></a>
 							</td>
 							<td>
 								<a href="<?php echo base_url(); ?>productos/edit/<?php echo $dato->id; ?>/<?php echo $pagina; ?>" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>

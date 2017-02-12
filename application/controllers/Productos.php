@@ -22,7 +22,7 @@ class Productos extends CI_Controller {
 		} else {
 			$pagina = 0;
 		}
-		$por_pagina = 1;
+		$por_pagina = 10;
 
 		// Zona de carga de datos
 		$datos = $this->productos_model->getAllPagination($pagina, $por_pagina, "limit");
@@ -54,7 +54,7 @@ class Productos extends CI_Controller {
 		$config['next_tag_close'] = '</li>';
 		$config['prev_tag_open'] = '<li>';
 		$config['prev_tag_close'] = '</li>';
-	    $config['cur_tag_open'] = '<li><a><b>';
+		$config['cur_tag_open'] = '<li><a><b>';
 		$config['cur_tag_close'] = '</b></a></li>';
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
@@ -74,7 +74,7 @@ class Productos extends CI_Controller {
 					'precio'=>$this->input->post('precio', true),
 					'stock'=>$this->input->post('stock', true),
 					'fecha'=>date('Y-m-d'),
-				);
+					);
 				$insertar = $this->productos_model->insertar($data);
 				//echo $insertar; exit;
 
@@ -116,6 +116,47 @@ class Productos extends CI_Controller {
 		$this->layout->view('edit', compact('datos','id','pagina'));
 	}
 
+	public function fotos($id=null, $pagina=null){
+		if(!$id){show_404();}
+		$datos = $this->productos_model->getAllById($id);
+		if(sizeof($datos)==0){show_404();}
+
+		if($this->input->post()){
+			/*Debo crear el callback para validar el tipo de archivo*/
+			/*Subimos el archivo*/
+			$config['upload_path'] = './public/uploads/productos';
+			$config['allowed_types'] = 'gif|jpg|png|pdf|jpeg';
+			/*$config['max_size']     = '100'; # Tamaño máximo en bytes
+			$config['max_width'] = '1024';
+			$config['max_height'] = '768'; */
+			$config['encrypt_name'] = true;
+			$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload('file')){
+				$error = array('error' => $this->upload->display_errors());
+			}
+
+			/*Obtenemos en nombre del archivo*/
+			$imagen = $this->upload->data();
+			$file_name = $imagen['file_name'];
+
+			/*Generamos el insert en la tabla respectiva*/
+			/* el true en el método post() es para evitar el filtro xss*/
+			$data = array(
+				"id_producto"=>$this->input->post('id', true),
+				"foto"=>$file_name,
+				);
+			$this->productos_model->insertarFoto($data);
+
+			$this->session->set_flashdata('css', 'success');
+			$this->session->set_flashdata('mensaje','El Registro se ha insertado exitosamente');
+
+			redirect(base_url().'productos/fotos/'.$this->input->post('id').'/'.$this->input->post('pagina'));
+		}
+
+		$fotos = $this->productos_model->getFotoById($id);
+		$this->layout->view('fotos', compact('datos','id','pagina', 'fotos'));
+	}
+
 	public function delete($id=null){
 		if(!id){show_404();}
 		$datos = $this->productos_model->getAllById($id);
@@ -127,5 +168,5 @@ class Productos extends CI_Controller {
 
 		redirect(base_url().'productos');
 	}
-	
+
 }

@@ -37,10 +37,24 @@ class productos_model extends CI_Model {
 		return $query->row();
 	}
 
+	public function getFotoById($id){
+		$query = $this->db
+				  ->select("id, id_producto, foto")
+				  ->from("productos_fotos")
+				  ->where(array("id_producto"=>$id))
+				  ->get();
+		return $query->result();
+	}
+
 	public function insertar($data = array()){
 		/* insert() -> recibe por parámetro la tabla y los datos */
 		$this->db->insert('productos', $data);
 		/* insert_id()-> Devuelve el id, del registro que acaba de ingresar */
+		return $this->db->insert_id();
+	}
+
+	public function insertarFoto($data = array()){
+		$this->db->insert('productos_fotos', $data);
 		return $this->db->insert_id();
 	}
 

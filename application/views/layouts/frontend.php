@@ -6,9 +6,9 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
 </head>
 <body>
-	<h1 class="text-center">Clase 8</h1>
+	<h1 class="text-center">Clase 9</h1>
 	<p class="text-center">
-	Subir archivos al servidor utilizando la clase Upload
+	Upload de archivos múltiple
 	</p>
 	<!--contenido-->
 	<?php echo $content_for_layout;?>

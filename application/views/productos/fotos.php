@@ -24,10 +24,8 @@
 			<?php	} ?>	
 			<p>
 				<label for="file">Foto:</label>
-				<input type="file" name="file">
-				<!-- 
-				Para subir varios archivos
-				<input type="file" name="file[]" multiple="true"/> -->
+				<!--<input type="file" name="file"> -->
+				<input type="file" name="file[]" multiple="true"/>
 			</p>
 			<hr>
 			<input type="hidden" name="id" value="<?php echo $id; ?>">

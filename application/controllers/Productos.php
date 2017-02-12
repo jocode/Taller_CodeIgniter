@@ -157,6 +157,18 @@ class Productos extends CI_Controller {
 		$this->layout->view('fotos', compact('datos','id','pagina', 'fotos'));
 	}
 
+	public function fotos_multiple($id=null, $pagina=null){
+		if(!$id){show_404();}
+		$datos = $this->productos_model->getAllById($id);
+		if(sizeof($datos)==0){show_404();}
+
+		if($this->input->post()){
+			
+		}
+		$fotos = $this->productos_model->getFotoById($id);
+		$this->layout->view('fotos', compact('datos', 'id', 'fotos'));
+	}
+
 	public function delete($id=null){
 		if(!id){show_404();}
 		$datos = $this->productos_model->getAllById($id);

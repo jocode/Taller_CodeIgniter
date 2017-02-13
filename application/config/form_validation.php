@@ -29,5 +29,13 @@ $config = array(
         ), 
         
         
+         /**
+         * login
+         * */
+        'login'
+        => array(
+            array('field' => 'correo','label' => 'Correo','rules' => 'required|is_string|trim|valid_email'),
+            array('field' => 'pass','label' => 'Contraseña','rules' => 'required|is_string|trim'),
+        ), 
       
 );

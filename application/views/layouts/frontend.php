@@ -6,9 +6,9 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
 </head>
 <body>
-	<h1 class="text-center">Clase 11</h1>
+	<h1 class="text-center">Clase 12</h1>
 	<p class="text-center">
-	Creación de Reporte a Excel
+	Creación de un Login
 	</p>
 	<!--contenido-->
 	<?php echo $content_for_layout;?>

@@ -6,9 +6,9 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
 </head>
 <body>
-	<h1 class="text-center">Clase 9</h1>
+	<h1 class="text-center">Clase 10</h1>
 	<p class="text-center">
-	Upload de archivos múltiple
+	Creación de Reporte PDF con la librería mPDF
 	</p>
 	<!--contenido-->
 	<?php echo $content_for_layout;?>

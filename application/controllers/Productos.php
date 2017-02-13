@@ -254,8 +254,42 @@ class Productos extends CI_Controller {
 	/**
 	* PDF
 	**/
-   public function pdf(){
-   	
-   }
+	public function pdf(){
+		$datos = $this->productos_model->getAll();
+		$html.= '<h1 class="text-center">Listado de productos</h1>';
+		$html.= '
+		<table class="table table-bordered table-sprited table-hover text-center">
+			<thead align="center">
+				<tr>
+					<th class="text-center">Id</th>
+					<th class="text-center">Nombre</th>
+					<th class="text-center">Precio</th>
+					<th class="text-center">Stock</th>
+					<th class="text-center">Fecha</th>
+				</tr>
+			</thead>
+			<tbody>';
+	    #Construir la estructura dinámica del pdf
+	    foreach ($datos as $dato) {
+	    	$html.='
+				<tr>
+				   <td>'.$dato->id.'</td>
+				   <td>'.$dato->nombre.'</td>
+				   <td>'.number_format($dato->precio, 0, '', '.').'</td>
+				   <td>'.$dato->stock.'</td>
+				   <td>'.fecha($dato->fecha).'</td>
+				</tr>
+	    	';
+	    }
+				
+		$html.='</tbody></table>';
+		/*Agregar estilos al PDF*/
+		$estilos=file_get_contents(base_url().'public/css/bootstrap.min.css');
+        $this->mpdf->WriteHTML($estilos,1);
+		$this->mpdf->WriteHTML($html);
+		$this->mpdf->setDisplayMode('fullpage');
+		$this->mpdf->Output();
+		exit;
+	}
 
 }

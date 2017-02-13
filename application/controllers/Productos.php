@@ -292,4 +292,11 @@ class Productos extends CI_Controller {
 		exit;
 	}
 
+	/**
+	* Reporte a Exel
+	**/
+	public function excel() {
+		
+	}
+
 }

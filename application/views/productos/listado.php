@@ -8,8 +8,8 @@
 			</div>
 			<?php } ?>
 			<p class="pull-right">
-				<a href="<?php echo base_url(); ?>productos/pdf" target="_black" class="btn btn-danger"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>Exportar a PDF</a>
-				<a href="<?php echo base_url(); ?>productos/excel" target="_black" class="btn btn-success"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>Exportar a Excel</a>
+				<a href="<?php echo base_url(); ?>productos/pdf" target="_blank" class="btn btn-danger"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>Exportar a PDF</a>
+				<a href="<?php echo base_url(); ?>productos/excel" target="_blank" class="btn btn-success"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>Exportar a Excel</a>
 			</p>
 			<p>
 				<a class="btn btn-success" href="<?php echo base_url(); ?>productos/add" title="Agregar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Agregar</a>

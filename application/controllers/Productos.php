@@ -295,8 +295,49 @@ class Productos extends CI_Controller {
 	/**
 	* Reporte a Exel
 	**/
-	public function excel() {
-		
-	}
+	 public function excel()
+    {
+        $this->phpexcel->getProperties()
+                       ->setTitle('excel')
+                       ->setDescription('descripción');
+        $datos=$this->productos_model->getAll();
+        # Activa la inicialización de la hoja
+        $sheet=$this->phpexcel->getActiveSheet();
+
+        /***** Generar la primera Fila (Encabezado) ****/
+        $sheet->setTitle('Título de la hoja del reporte');               
+        # setCellValue() -> Asignar el valor de nombre y valor de la fila
+        $sheet->setCellValue("A1","ID");
+        $sheet->setCellValue("B1","Nombre");
+        $sheet->setCellValue("C1","Precio");
+        $sheet->setCellValue("D1","Stock");
+        $sheet->setCellValue("E1","Fecha");
+
+        /**** Generamos las demás fila de acuerdo a los registros que tenemos en la tabla de mysql ****/
+
+        $i=2;  # Para que se salte las filas y de ahí en adelante cargue los registros
+        foreach ($datos as $dato){
+        	$sheet->setCellValue("A".$i, $dato->id);
+        	$sheet->setCellValue("B".$i, $dato->nombre);
+        	$sheet->setCellValue("C".$i, $dato->precio);
+		    $sheet->setCellValue("D".$i, $dato->stock);
+		    $sheet->setCellValue("E".$i, $dato->fecha);
+		    $i++;
+        }
+      
+        /*****Generamos la renderización del documento excel******/
+		# header('Content-Type') -> Para retorne un formato no en DOM sino en MS-Excel de microsft
+        header("Content-Type: application/vnd.ms-excel");
+        # Almacenamos el nombre en una variable con la hora y fecha actual para que no se repita el nombre de los reportes
+        $nombre="Reporte ".date("Y-m-d H:i:s");
+        # Le coloca el nombre al archivo
+        header("Content-Disposition: attachment; filename=\"$nombre.xls\"");
+        # header('Cache-Control: max-age-0'); -> Para que no se quede en Cache el archivo excel cuando se vaya a descargar 
+        header("Cache-Control: max-age=0");
+        # PHPExcel_IOFactory::createWriter(), escribe el archivo en formato Excel-5
+        $writer=PHPExcel_IOFactory::createWriter($this->phpexcel,"Excel5");
+        # Imprime el archivo php al formato excel
+        $writer->save("php://output");	
+    }
 
 }

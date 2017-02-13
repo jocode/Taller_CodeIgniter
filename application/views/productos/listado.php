@@ -7,6 +7,9 @@
 				<?php echo $this->session->flashdata('mensaje'); ?>
 			</div>
 			<?php } ?>
+			<p class="pull-right">
+				<a href="<?php echo base_url(); ?>productos/pdf" class="btn btn-danger"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>Exportar a PDF</a>
+			</p>
 			<p>
 				<a class="btn btn-success" href="<?php echo base_url(); ?>productos/add" title="Agregar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Agregar</a>
 				<table class="table table-bordered table-sprited table-hover text-center">

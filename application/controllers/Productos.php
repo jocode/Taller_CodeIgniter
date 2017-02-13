@@ -172,35 +172,35 @@ class Productos extends CI_Controller {
 					#Case para el formato mimetype
 					case 'image/jpeg':
 						// Insertamos el registro con la foto vacía
-						$data = array(
-							"id_producto"=>$this->input->post('id', true),
-							"foto"=>'',
-							);
-						$valor = $this->productos_model->insertarFoto($data);
+					$data = array(
+						"id_producto"=>$this->input->post('id', true),
+						"foto"=>'',
+						);
+					$valor = $this->productos_model->insertarFoto($data);
 						// Subimos la foto
-						$foto = 'foto_'.$this->input->post('id',true).'_'.$valor.'.jpg';
-						copy($_FILES['file']['tmp_name'][$i],"public/uploads/productos/".$foto);
+					$foto = 'foto_'.$this->input->post('id',true).'_'.$valor.'.jpg';
+					copy($_FILES['file']['tmp_name'][$i],"public/uploads/productos/".$foto);
 						//Actualizamos el registro con el nombre de la foto
-						$data1=array
-						(
-							"foto"=>$foto,
-							);
-						$this->productos_model->updateFoto($data1,$valor);
+					$data1=array
+					(
+						"foto"=>$foto,
+						);
+					$this->productos_model->updateFoto($data1,$valor);
 
 					break;
 					case 'image/png':
-						$data = array(
-							"id_producto"=>$this->input->post('id', true),
-							"foto"=>'',
-							);
-						$valor = $this->productos_model->insertarFoto($data);
-						$foto = 'foto_'.$this->input->post('id',true).'_'.$valor.'.png';
-						copy($_FILES['file']['tmp_name'][$i],"public/uploads/productos/".$foto);
-						$data1=array
-						(
-							"foto"=>$foto,
-							);
-						$this->productos_model->updateFoto($data1,$valor);
+					$data = array(
+						"id_producto"=>$this->input->post('id', true),
+						"foto"=>'',
+						);
+					$valor = $this->productos_model->insertarFoto($data);
+					$foto = 'foto_'.$this->input->post('id',true).'_'.$valor.'.png';
+					copy($_FILES['file']['tmp_name'][$i],"public/uploads/productos/".$foto);
+					$data1=array
+					(
+						"foto"=>$foto,
+						);
+					$this->productos_model->updateFoto($data1,$valor);
 					break;
 					
 					default:
@@ -250,5 +250,12 @@ class Productos extends CI_Controller {
 
 		redirect(base_url().'productos');
 	}
+
+	/**
+	* PDF
+	**/
+   public function pdf(){
+   	
+   }
 
 }
